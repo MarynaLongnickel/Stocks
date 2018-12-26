@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>Reusable Form Demo</title>
+		<style type="text/css">
+			body {
+				margin: 0;
+				position: relative;
+				background-color: #c9cfd8;
+			}
+
+			.box {
+				position: relative;
+				display: -webkit-box;
+				display: -ms-flexbox;
+				display: block;
+				height: 100%;
+				-webkit-box-align: center;
+				   -ms-flex-align: center;
+					  align-items: center;
+				-webkit-box-pack: center;
+				   -ms-flex-pack: center;
+				 justify-content: center;
+				margin-top: 5%;
+			}
+
+			.content {
+				position: relative;
+				display: block;
+				text-align: center;
+				margin-top: 2%;
+			}
+			.line {
+				display: flex;
+				text-align: center;
+				justify-content: space-around;
+				align-items: baseline;
+				margin-left: -10%;
+				margin-right: 28.5%;
+				
+			}
+			.report {
+				font-size: 1.2em;
+			}
+			#imgs{
+				display: flex;
+				justify-content: space-around;
+			}
+			input { text-align: center; }
+
+			.alert.Buy {
+			  	font-size: 2em;
+				color: #008F14;
+			}
+			.alert.Sell {
+			  	font-size: 2em;
+				color: #D70000;
+			}
+		</style>
+    </head>
+    <body>
+		<div class = "box">
+			<div class = "content">
+				{% with messages = get_flashed_messages(with_categories=true) %}
+					{% if messages %}
+							{% for category, message in messages %}
+								<div class="alert {{ category }}"> {{ message }} </div>
+							{% endfor %}
+					{% endif %}
+				{% endwith %}
+			</div>
+			<div class = "line">
+				<div class = "report">
+					{{ hold_change }}
+					<br>
+					{{ trade_change }}
+				</div>
+				<div class="content">
+				<form action="" method="post">
+						{{ form.csrf }}
+					<div class="input" align="center">
+						{{ form.name.label }}
+						<br>
+						{{ form.name }}
+					</div>
+
+					<div class="submit" align="center">
+						<input type="submit" value="$$$" />
+					</div>
+				</form>
+				</div>
+			</div>
+			<div class = "content">
+				<div id = "imgs">
+					<img src="{{ url_for('static', filename = name + '_data.png') }}" alt=" " height="46%" width="46%">
+					<img src="{{ url_for('static', filename = name + '_prediction.png') }}" alt=" " height="52.5%" width="52.5%">
+				</div>
+			</div>
+		</div>
+    </body>
+</html>
